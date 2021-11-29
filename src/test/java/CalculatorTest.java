@@ -39,4 +39,12 @@ public class CalculatorTest {
         //Assert
         assertEquals(157, result);
     }
+
+    @Test
+    public void testForNewLineSeparator(){
+        //Act
+        long result = calc.add("5,2,50\n100");
+        //Assert
+        assertEquals(157, result);
+    }
 }

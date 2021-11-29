@@ -10,10 +10,8 @@ public class Calculator {
     public long add(String nums){
         if(nums.isEmpty())
             return result;
-        else if(!nums.contains(",")) {
-            result = Long.parseLong(nums);
-        } else if(nums.contains(",")){
-            List<String> numList = List.of(nums.split(","));
+       else {
+            List<String> numList = List.of(nums.split(",|\n"));
             result = numList.stream()
                     .mapToLong(num -> Long.parseLong(num))
                     .sum();
