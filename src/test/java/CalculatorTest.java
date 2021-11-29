@@ -23,4 +23,12 @@ public class CalculatorTest {
         //Assert
         assertEquals(5, result);
     }
+
+    @Test
+    public void testForTwoNumbers(){
+        //Act
+        long result = calc.add("5,2");
+        //Assert
+        assertEquals(7, result);
+    }
 }
