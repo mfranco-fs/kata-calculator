@@ -31,4 +31,12 @@ public class CalculatorTest {
         //Assert
         assertEquals(7, result);
     }
+
+    @Test
+    public void testForMultipleNumbers(){
+        //Act
+        long result = calc.add("5,2,50,100");
+        //Assert
+        assertEquals(157, result);
+    }
 }
