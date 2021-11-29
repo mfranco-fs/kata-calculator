@@ -13,6 +13,14 @@ public class CalculatorTest {
         //Act
         long result = calc.add("");
         //Assert
-        assertEquals(0,0);
+        assertEquals(0,result);
+    }
+
+    @Test
+    public void testForSingleNumber(){
+        //Act
+        long result = calc.add("5");
+        //Assert
+        assertEquals(5, result);
     }
 }
