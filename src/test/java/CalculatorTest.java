@@ -47,4 +47,13 @@ public class CalculatorTest {
         //Assert
         assertEquals(157, result);
     }
+
+    @Test
+    public void testForDifferentDelimeter(){
+        //Act
+        long result = calc.add("//;\n5,2,50\n100;4");
+        //Assert
+        assertEquals(161, result);
+    }
+
 }
