@@ -24,6 +24,7 @@ public class Calculator {
             findNegatives(numList);
             result = numList.stream()
                     .mapToLong(num -> Long.parseLong(num))
+                    .filter(num -> num < 1000)
                     .sum();
         }
         return result;

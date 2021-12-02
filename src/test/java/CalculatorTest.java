@@ -81,10 +81,37 @@ public class CalculatorTest {
         assertEquals(161, result);
     }
 
-    @Test(expected = Exception.class)
-    public void testForNegativeValues() throws Exception{
+    @Test
+    public void testForNegativeValue() {
         //Act
-        long result = calc.add("//;\n5,2,50\n100;-4");
+        try{
+            long result = calc.add("//;\n5,2,50\n100;-4");
+        } catch(Exception e){
+            assertEquals("Negatives not allowed: -4", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testForNegativeValues() {
+        //Act
+        try{
+            long result = calc.add("//;\n5,2,50\n100;-4,-45");
+        } catch(Exception e){
+            //assert
+            assertEquals("Negatives not allowed: -4,-45", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testForFourDigitNumbers() {
+        //Act
+        long result = 0;
+        try{
+            result = calc.add("//;\n5,2,50\n1000");
+        } catch(Exception e){
+        }
+        //Assert
+        assertEquals(57, result);
     }
 
 }
