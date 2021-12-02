@@ -11,7 +11,11 @@ public class CalculatorTest {
     @Test
     public void testForEmpty(){
         //Act
-        long result = calc.add("");
+        long result = 0;
+        try{
+            result = calc.add("");
+        } catch(Exception e){
+        }
         //Assert
         assertEquals(0,result);
     }
@@ -19,7 +23,11 @@ public class CalculatorTest {
     @Test
     public void testForSingleNumber(){
         //Act
-        long result = calc.add("5");
+        long result = 0;
+        try{
+            result = calc.add("5");
+        } catch(Exception e){
+        }
         //Assert
         assertEquals(5, result);
     }
@@ -27,7 +35,11 @@ public class CalculatorTest {
     @Test
     public void testForTwoNumbers(){
         //Act
-        long result = calc.add("5,2");
+        long result = 0;
+        try{
+            result = calc.add("5,2");
+        } catch(Exception e){
+        }
         //Assert
         assertEquals(7, result);
     }
@@ -35,7 +47,11 @@ public class CalculatorTest {
     @Test
     public void testForMultipleNumbers(){
         //Act
-        long result = calc.add("5,2,50,100");
+        long result = 0;
+        try{
+            result = calc.add("5,2,50,100");
+        } catch(Exception e){
+        }
         //Assert
         assertEquals(157, result);
     }
@@ -43,7 +59,12 @@ public class CalculatorTest {
     @Test
     public void testForNewLineSeparator(){
         //Act
-        long result = calc.add("5,2,50\n100");
+        long result = 0;
+        try{
+            result = calc.add("5,2,50\n100");
+        } catch(Exception e){
+        }
+
         //Assert
         assertEquals(157, result);
     }
@@ -51,9 +72,19 @@ public class CalculatorTest {
     @Test
     public void testForDifferentDelimeter(){
         //Act
-        long result = calc.add("//;\n5,2,50\n100;4");
+        long result = 0;
+        try{
+            result = calc.add("//;\n5,2,50\n100;4");
+        } catch(Exception e){
+        }
         //Assert
         assertEquals(161, result);
+    }
+
+    @Test(expected = Exception.class)
+    public void testForNegativeValues() throws Exception{
+        //Act
+        long result = calc.add("//;\n5,2,50\n100;-4");
     }
 
 }
