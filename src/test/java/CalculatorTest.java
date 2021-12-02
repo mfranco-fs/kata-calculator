@@ -114,4 +114,29 @@ public class CalculatorTest {
         assertEquals(57, result);
     }
 
+
+    @Test
+    public void testForMultiCharDelimeters() {
+        //Act
+        long result = 0;
+        try{
+            result = calc.add("//[hola]\n1hola2hola3");
+        } catch(Exception e){
+        }
+        //Assert
+        assertEquals(6, result);
+    }
+
+
+    @Test
+    public void testForMultipleDelimeters() {
+        //Act
+        long result = 0;
+        try{
+            result = calc.add("//[hi][there]\n1hi2there3");
+        } catch(Exception e){
+        }
+        //Assert
+        assertEquals(6, result);
+    }
 }

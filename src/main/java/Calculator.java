@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Calculator {
@@ -13,13 +15,11 @@ public class Calculator {
     public long add(String nums) throws Exception{
         if(nums.startsWith("//")){
            int endDel = nums.indexOf("\n");
-           String difDel = nums.substring(2, endDel);
-           delimeters = delimeters + "|" + difDel;
+           String difDels = nums.substring(2, endDel);
+           updateDelimeters(difDels);
            nums = nums.substring(endDel + 1);
         }
-        if(nums.isEmpty())
-            return result;
-       else {
+       if(!nums.isEmpty()) {
             List<String> numList = List.of(nums.split(delimeters));
             findNegatives(numList);
             result = numList.stream()
@@ -38,6 +38,18 @@ public class Calculator {
             String message = "Negatives not allowed: ";
             message = message.concat(String.join(",",negList));
             throw new Exception(message);
+        }
+    }
+
+    private void updateDelimeters(String delimeters){
+        if(delimeters.contains("[") && delimeters.contains("]")){
+            Pattern pattern = Pattern.compile("\\[(.*?)\\]");
+            Matcher matcher = pattern.matcher(delimeters);
+            while( matcher.find() ) {
+                this.delimeters = this.delimeters + "|" + matcher.group(1);
+            }
+        } else{
+            this.delimeters = this.delimeters + "|" + delimeters;
         }
     }
 
