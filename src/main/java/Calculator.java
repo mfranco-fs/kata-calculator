@@ -12,7 +12,7 @@ public class Calculator {
         result = 0;
     }
 
-    public long add(String nums) throws Exception{
+    public long add(String nums) throws IllegalArgumentException{
         if(nums.startsWith("//")){
            int endDel = nums.indexOf("\n");
            String difDels = nums.substring(2, endDel);
@@ -30,14 +30,14 @@ public class Calculator {
         return result;
     }
 
-    private void findNegatives(List<String> numList) throws Exception{
+    private void findNegatives(List<String> numList) throws IllegalArgumentException{
         List<String> negList= numList.stream()
                 .filter(neg -> neg.startsWith("-"))
                 .collect(Collectors.toList());
         if(!negList.isEmpty()){
             String message = "Negatives not allowed: ";
             message = message.concat(String.join(",",negList));
-            throw new Exception(message);
+            throw new IllegalArgumentException(message);
         }
     }
 

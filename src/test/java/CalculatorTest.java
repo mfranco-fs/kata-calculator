@@ -1,5 +1,8 @@
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import static org.junit.Assert.*;
 
 public class CalculatorTest {
@@ -8,8 +11,11 @@ public class CalculatorTest {
     @Before
     public void setup(){ calc = new Calculator(); }
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
-    public void testForEmpty(){
+    public void add_none_returnsDefault(){
         //Act
         long result = 0;
         try{
@@ -21,7 +27,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testForSingleNumber(){
+    public void add_singleValue_returnsSameValue(){
         //Act
         long result = 0;
         try{
@@ -33,7 +39,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testForTwoNumbers(){
+    public void add_twoNumbers_returnsTheSum(){
         //Act
         long result = 0;
         try{
@@ -45,7 +51,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testForMultipleNumbers(){
+    public void add_multipleNumbers_returnsTheSum(){
         //Act
         long result = 0;
         try{
@@ -57,7 +63,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testForNewLineSeparator(){
+    public void add_multipleNumbersWithNewLine_returnsTheSum(){
         //Act
         long result = 0;
         try{
@@ -70,7 +76,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testForDifferentDelimeter(){
+    public void add_multipleNumbersWithNewDelimeter_returnsTheSum(){
         //Act
         long result = 0;
         try{
@@ -82,7 +88,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testForNegativeValue() {
+    public void add_negative_throws1() {
         //Act
         try{
             long result = calc.add("//;\n5,2,50\n100;-4");
@@ -92,7 +98,7 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testForNegativeValues() {
+    public void add_negative_throws2() {
         //Act
         try{
             long result = calc.add("//;\n5,2,50\n100;-4,-45");
@@ -100,6 +106,17 @@ public class CalculatorTest {
             //assert
             assertEquals("Negatives not allowed: -4,-45", e.getMessage());
         }
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void add_negative_throws3() {
+        long result = calc.add("//;\n5,2,50\n100;-4,-45");
+    }
+
+    @Test
+    public void add_negative_throws4() {
+        thrown.expect(IllegalArgumentException.class);
+        long result = calc.add("//;\n5,2,50\n100;-4,-45");
     }
 
     @Test
